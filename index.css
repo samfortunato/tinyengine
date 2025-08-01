@@ -1,0 +1,7 @@
+/**
+ * Add .debug classes to specific elements for custom debug behavior if needed.
+ */
+
+canvas.debug {
+	border: 1px solid red;
+}
