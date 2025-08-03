@@ -1,4 +1,4 @@
-import { Board } from '../engine/board.js';
+import { Canvas } from '../engine/canvas.js';
 import { Input } from '../engine/input.js';
 import { Entity } from '../engine/entity.js';
 
@@ -13,22 +13,28 @@ export class Player extends Entity {
 	shape = new Shape({ color: 'black' });
 	stats = new Stats({ speed: 400 });
 
+	constructor(x, y) {
+		super();
+
+		this.transform.set(x, y);
+	}
+
 	update(dt) {
 		this.transform.translate(
 			Input.getAxis().x * this.stats.speed * dt,
 			Input.getAxis().y * this.stats.speed * dt,
 		);
 
-		if ((this.transform.y + this.mesh.h) < 0) this.transform.translate(0, Board.canvas.height);
-		if ((this.transform.x + this.mesh.w) < 0) this.transform.translate(Board.canvas.width, 0);
-		if ((this.transform.y) > Board.canvas.height) this.transform.translate(0, -Board.canvas.height);
-		if ((this.transform.x + this.mesh.w) > Board.canvas.width) this.transform.translate(-Board.canvas.width, 0);
+		if ((this.transform.y + this.mesh.h) < 0) this.transform.translate(0, Canvas.height);
+		if ((this.transform.x + this.mesh.w) < 0) this.transform.translate(Canvas.width, 0);
+		if ((this.transform.y) > Canvas.height) this.transform.translate(0, -Canvas.height);
+		if ((this.transform.x + this.mesh.w) > Canvas.width) this.transform.translate(-Canvas.width, 0);
 	}
 
 	draw(loopX, loopY) {
-		Board.context.fillStyle = this.shape.color;
+		Canvas.context.fillStyle = this.shape.color;
 
-		Board.context.fillRect(
+		Canvas.context.fillRect(
 			this.transform.x + loopX,
 			this.transform.y + loopY,
 			this.mesh.w,
