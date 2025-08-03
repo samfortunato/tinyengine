@@ -1,0 +1,48 @@
+import { Assert, test } from '../modules/test/index.js';
+
+import { Input } from '../../engine/input.js';
+
+test('on init, adds event listeners for key press and key release events', () => {
+	Input.init();
+
+	document.dispatchEvent(new KeyboardEvent('keydown', { code: 'a' }));
+	const wasPressed = Input.isPressed('a');
+
+	document.dispatchEvent(new KeyboardEvent('keyup', { code: 'a' }));
+	const wasReleased = Input.isPressed('a');
+
+	Assert.truthy(wasPressed);
+	Assert.truthy(wasReleased);
+});
+
+test('on update, updates the input axis', () => {
+	Input.init();
+
+	const before = { ...Input.getAxis() };
+
+	document.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowUp' }));
+	Input.update();
+
+	const after = { ...Input.getAxis() };
+
+	Assert.notEqual(before.y, after.y);
+	Assert.equal(-1, after.y);
+});
+
+test('using \`isPressed\`, tracks key presses if key is pressed', () => {
+	Input.init();
+
+	document.dispatchEvent(new KeyboardEvent('keydown', { code: 'a' }));
+
+	Assert.equal(true, Input.isPressed('a'));
+});
+
+test('using \`getAxis\`, returns the input access', () => {
+	Input.init();
+
+	const actual = Input.getAxis();
+
+	Assert.truthy(actual);
+	Assert.has(actual, 'x');
+	Assert.has(actual, 'y');
+});
