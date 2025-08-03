@@ -1,1 +1,3 @@
-export class Component { }
+export class Component {
+	update() { }
+}
