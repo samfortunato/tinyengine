@@ -1,0 +1,11 @@
+# development
+node_modules/
+
+# build
+dist/
+
+# platform
+.DS_Store
+
+# meta
+sandbox/
