@@ -16,14 +16,16 @@ function init() {
 export function test(description, run) {
 	try {
 		run();
+
+		console.log(`✓ ${description}`);
 	} catch (error) {
 		console.error(`X ${description}\n`);
-		console.error(error);
-
-		return;
+		console.error(error, '\n');
 	}
+}
 
-	console.log(`✓ ${description}`);
+test.skip = function (description, _run) {
+	console.log(`∅ ${description}`);
 }
 
 export class Assert {
