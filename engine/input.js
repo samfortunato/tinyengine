@@ -39,9 +39,9 @@ export class Input {
 	}
 
 	/**
-	 * @param {EventListener} listen
+	 * @param {(evt: KeyboardEvent) => void} listen
 	 *
-	 * @returns {EventListener}
+	 * @returns {(evt: KeyboardEvent) => void}
 	 * */
 	static #overwritePlatformBehaviors(listen) {
 		const KEYS_WITH_DEFAULT_BEHAVIOR = [
