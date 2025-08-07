@@ -1,12 +1,8 @@
 export class Vector2D {
-	/** Initialize a private representation as an empty object so that we only have to create the object once. */
-	#component = {};
+	// Initialize a private representation so that we only have to create the object once.
+	#component = { x: 0, y: 0 };
 
-	/**
-	 * The vector in component form, e.g. (x, y).
-	 *
-	 * Represented as an object, it comes in the form of `{ x, y }`.
-	 * */
+	/** The vector in component form, e.g. (x, y). */
 	get component() {
 		this.#component.x = this.x;
 		this.#component.y = this.y;

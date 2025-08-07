@@ -1,10 +1,12 @@
 import { Canvas } from './canvas.js';
 
-import { Vector2D } from '../structures/vector.js';
+import { Vector2D } from '../structures/vector-2d.js';
+import { Point } from '../structures/point.js';
 
 export class Input {
 	static #keys = new Set();
 	static #input = new Vector2D(0, 0);
+	static #cursor = new Point(0, 0);
 
 	static init() {
 		document.addEventListener('keydown', this.#overwritePlatformBehaviors((evt) => {
@@ -14,6 +16,10 @@ export class Input {
 		document.addEventListener('keyup', this.#overwritePlatformBehaviors((evt) => {
 			this.#keys.delete(evt.code);
 		}));
+
+		document.addEventListener('mousemove', (evt) => {
+			this.#cursor.set(evt.x, evt.y);
+		});
 
 		// focus the game upon load so that input automatically goes to game
 		Canvas.element.focus();
@@ -36,6 +42,10 @@ export class Input {
 
 	static getAxis() {
 		return this.#input.component;
+	}
+
+	static getCursorPosition() {
+		return this.#cursor.cartesian;
 	}
 
 	/**
