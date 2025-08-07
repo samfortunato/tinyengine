@@ -1,6 +1,6 @@
 #!/bin/bash
 
-find ./tests \
+find ./src/tests \
 	-name "*.js" ! \
 	-path "*/modules/*" \
 	-exec node {} \;

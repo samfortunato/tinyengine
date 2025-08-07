@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bun build ./index.js \
+bun build ./src/index.js \
 	--outfile ./dist/build.js \
 	--minify \
 	--watch
